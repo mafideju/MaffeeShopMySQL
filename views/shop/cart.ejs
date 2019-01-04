@@ -1,0 +1,28 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+  <%- include('../includes/navi.ejs') %>
+  <main>
+    <h2>Carrinho de Compras</h2>
+    <% if (products.length > 0) { %>
+    <ul>
+      <% products.forEach(cartProd => { %>
+      <li>
+        <p>
+          <%= cartProd.productData.title %> -
+          <%= cartProd.qty %> unids.
+        </p>
+        <form action="/cart-delete-item" method="POST">
+          <input type="hidden" value="<%= cartProd.productData.id %>" name="id">
+          <button class="btn" type="submit">Limpar Carrinho</button>
+        </form>
+      </li>
+      <% }) %>
+    </ul>
+    <% } else { %>
+    <h1>Coloque um produto no carrinho!!</h1>
+    <% } %>
+  </main>
+  <%- include('../includes/end.ejs') %>

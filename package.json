@@ -1,0 +1,23 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "Node.js",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "Marcio Mafideju Rodrigues",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.18.3"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "mysql2": "^1.6.4",
+    "pug": "^2.0.3",
+    "uuid": "^3.3.2"
+  }
+}

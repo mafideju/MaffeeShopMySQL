@@ -1,0 +1,39 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/forms.css">
+<link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+  <%- include('../includes/navi.ejs') %>
+
+
+  <main>
+    <form class="product-form" action="/admin/<% if (editing) { %>edit-product<% } else { %>add-product<% } %>" method="POST">
+      <div class="form-control">
+        <label for="title">Titulo</label>
+        <input type="text" name="title" id="title" value="<% if (editing) { %> <%= product.title %> <% } %>">
+      </div>
+      <div class="form-control">
+        <label for="image">URL da Imagem</label>
+        <input type="url" name="image" id="image" value="<% if (editing) { %> <%= product.image %> <% } %>">
+      </div>
+      <div class="form-control">
+        <label for="price">Preço</label>
+        <input type="number" name="price" id="price" step="0.01" value="<% if (editing) { %><%= product.price %><% } %>">
+      </div>
+      <div class="form-control">
+        <label for="description">Descrição</label>
+        <textarea name="description" id="description" cols="120" rows="10"><% if (editing) { %><%=product.description%><% } %></textarea>
+      </div>
+
+      <% if (editing) { %>
+      <input type="hidden" value="<%= product.id %>" name="id">
+      <% } %>
+
+      <button class="btn" type="submit">
+        <% if (editing) { %>Atualizar
+        <% } else { %>Novo Produto
+        <% } %></button>
+    </form>
+  </main>
+  <%- include('../includes/end.ejs') %>
