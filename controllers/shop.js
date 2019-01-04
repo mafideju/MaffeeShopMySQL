@@ -1,36 +1,45 @@
 const Product = require('../models/product');
 const Cart = require('../models/cart');
 
+// ORM: Object Relational Mapping
+
 exports.getProducts = (req, res) => {
-  Product.fetchAll((products) => {
-    res.render('shop/product-list', {
-      products,
-      docTitle: "Lista de Produtos!",
-      path: "/products",
-    });
-  });
+  Product.fetchAll()
+    .then(([rows, fieldData]) => {
+      res.render('shop/product-list', {
+        products: rows,
+        docTitle: "Lista de Produtos!",
+        path: "/products",
+      });
+    })
+    .catch(err => console.log("getProducts =>", err));
 }
 
 exports.getProduct = (req, res) => {
   const productID = req.params.id;
   console.log('Params =>', req.params);
-  Product.findById(productID, product => {
-    res.render('shop/product-detail', {
-      product,
-      docTitle: product.title,
-      path: '/products'
-    });
-  });
+  Product.findById(productID)
+    .then(([product]) => {
+      console.log(product[0].title)
+      res.render('shop/product-detail', {
+        product: product[0],
+        docTitle: product[0].title,
+        path: '/products'
+      });
+    })
+    .catch(err => console.log("getProduct", getProduct));
 }
 
 exports.getIndex = (req, res) => {
-  Product.fetchAll((products) => {
-    res.render('shop/index', {
-      products,
-      docTitle: "Maffee Shop It!",
-      path: "/",
-    });
-  });
+  Product.fetchAll()
+    .then(([rows, fieldData]) => {
+      res.render('shop/index', {
+        products: rows,
+        docTitle: "Maffee Shop It!",
+        path: "/",
+      });
+    })
+    .catch(err => console.log(err));
 }
 
 exports.getCart = (req, res) => {
