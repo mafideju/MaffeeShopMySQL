@@ -5,22 +5,28 @@
 <body>
   <%- include('../includes/navi.ejs') %>
   <main>
-    <h2>Carrinho de Compras</h2>
+    <h2 class="cart__item--title">Carrinho de Compras</h2>
     <% if (products.length > 0) { %>
-    <ul>
+    <ul class="cart__item--list">
       <% products.forEach(cartProd => { %>
-      <li>
-        <p>
-          <%= cartProd.productData.title %> -
-          <%= cartProd.qty %> unids.
-        </p>
+      <li class="cart__item">
+        <h2>
+          <%= cartProd.title %>
+        </h2>
+        <h3>
+          <%= cartProd.cartItem.qty %> unids.</h3>
         <form action="/cart-delete-item" method="POST">
-          <input type="hidden" value="<%= cartProd.productData.id %>" name="id">
-          <button class="btn" type="submit">Limpar Carrinho</button>
+          <input type="hidden" value="<%= cartProd.id %>" name="id">
+          <button class="btn btn-danger" type="submit">Limpar Carrinho</button>
         </form>
       </li>
       <% }) %>
     </ul>
+    <div class="centered">
+      <form action="/create-order" method="POST">
+        <button type="submit" class="btn">Fechar Pedido</button>
+      </form>
+    </div>
     <% } else { %>
     <h1>Coloque um produto no carrinho!!</h1>
     <% } %>

@@ -9,6 +9,7 @@
   "author": "Marcio Mafideju Rodrigues",
   "license": "ISC",
   "devDependencies": {
+    "ejs-lint": "^0.3.0",
     "nodemon": "^1.18.3"
   },
   "dependencies": {
